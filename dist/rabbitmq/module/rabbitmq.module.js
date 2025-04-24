@@ -14,6 +14,7 @@ const rabbitmq_controller_1 = require("../controller/rabbitmq.controller");
 const rabbitmq_service_1 = require("../service/rabbitmq.service");
 const events_module_1 = require("../../events/module/events.module");
 const container_module_1 = require("../../container/module/container.module");
+require('dotenv').config();
 let RabbitMQModule = class RabbitMQModule {
 };
 exports.RabbitMQModule = RabbitMQModule;
@@ -28,7 +29,7 @@ exports.RabbitMQModule = RabbitMQModule = __decorate([
                     name: 'RABBITMQ_SERVICE',
                     transport: microservices_1.Transport.RMQ,
                     options: {
-                        urls: ['amqp://guest:guest@localhost:5672'],
+                        urls: [process.env.RABBITMQ_URI],
                         queue: 'nestjs_queue',
                         queueOptions: { durable: false },
                     },

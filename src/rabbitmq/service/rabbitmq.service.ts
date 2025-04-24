@@ -26,7 +26,7 @@ export class RabbitMQService implements IRabbitMQService {
         const constructor = { listEvent: findListById, lastStateEventById: payload.state }
 
         this.criterios = [
-            new QuorumCriterio(constructor),
+            new QuorumCriterio(constructor), 
             new SensorPriority(constructor)
         ]
 

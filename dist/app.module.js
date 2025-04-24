@@ -13,6 +13,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const events_module_1 = require("./events/module/events.module");
 const rabbitmq_module_1 = require("./rabbitmq/module/rabbitmq.module");
 const container_module_1 = require("./container/module/container.module");
+require('dotenv').config();
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -20,7 +21,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
-            mongoose_1.MongooseModule.forRoot("mongodb://admin:secret123@localhost:27017/"),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URI),
             rabbitmq_module_1.RabbitMQModule,
             events_module_1.EventsModule,
             container_module_1.ContainerModule,

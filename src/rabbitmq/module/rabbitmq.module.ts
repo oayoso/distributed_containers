@@ -5,6 +5,7 @@ import { RabbitMQController } from '../controller/rabbitmq.controller';
 import { RabbitMQService } from '../service/rabbitmq.service';
 import { EventsModule } from '../../events/module/events.module';
 import { ContainerModule } from '../../container/module/container.module';
+require('dotenv').config();
 
 
 @Module({
@@ -17,7 +18,7 @@ import { ContainerModule } from '../../container/module/container.module';
         name: 'RABBITMQ_SERVICE',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://guest:guest@localhost:5672'],
+          urls: [process.env.RABBITMQ_URI!],
           queue: 'nestjs_queue',
           queueOptions: { durable: false },
         },

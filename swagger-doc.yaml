@@ -45,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Container'
+                $ref: '#/components/schemas/ContainerState'
 
   /container:
     get:
@@ -101,6 +101,12 @@ components:
         message:
           type: string
           example: Evento registrado correctamente
+          
+    ContainerState:
+      type: object
+      properties:
+        state:
+          type: string
 
     Container:
       type: object
@@ -129,7 +135,7 @@ components:
           example: 1
         limit:
           type: integer
-          example: 10
+          example: 9
         total:
           type: integer
           example: 1
