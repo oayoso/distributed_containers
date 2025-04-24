@@ -2,9 +2,7 @@
 
 ## Descripción
 
-Eres parte de un equipo que gestiona una plataforma de logística inteligente. Cada contenedor  
-(físico) en el mundo envía periódicamente su estado ("operativo", "dañado", "desconocido", etc.) a  
-tu sistema.
+Eres parte de un equipo que gestiona una plataforma de logística inteligente. Cada contenedor  (físico) en el mundo envía periódicamente su estado ("operativo", "dañado", "desconocido", etc.) a tu sistema.
 
 ## Tecnologías Utilizadas
 
