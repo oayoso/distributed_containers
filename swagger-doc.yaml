@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Estado Cuántico de Contenedores Distribuidos
+  version: 1.0.0
+  description: >
+    Eres parte de un equipo que gestiona una plataforma de logística inteligente. Cada contenedor
+    (físico) en el mundo envía periódicamente su estado ("operativo", "dañado", "desconocido", etc.) a
+    tu sistema.
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local de desarrollo
+
+paths:
+  /events:
+    post:
+      summary: Crear un evento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: Evento creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+
+  /container/{id}/status:
+    get:
+      summary: Obtener el estado de un contenedor por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del contenedor (MongoDB ObjectId)
+      responses:
+        '200':
+          description: Estado del contenedor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+
+  /container:
+    get:
+      summary: Listar contenedores con paginación
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Lista de contenedores paginada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedContainers'
+
+components:
+  schemas:
+    Event:
+      type: object
+      required:
+        - containerId
+        - state
+        - timestamp
+        - source
+      properties:
+        containerId:
+          type: string
+          example: ABC123
+        state:
+          type: string
+          example: operational
+        timestamp:
+          type: string
+          format: date-time
+          example: 2025-04-10T13:00:00Z
+        source:
+          type: string
+          example: sensor_main
+
+    EventResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Evento registrado correctamente
+
+    Container:
+      type: object
+      properties:
+        _id:
+          type: string
+        containerId:
+          type: string
+        state:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        __v:
+          type: integer
+
+    PaginatedContainers:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Container'
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          example: 1
+        lastPage:
+          type: integer
+          example: 1
+        hasNextPage:
+          type: boolean
+          example: false
+        hasPrevPage:
+          type: boolean
+          example: false
+        nextPage:
+          type: integer
+          example: null
+        prevPage:
+          type: integer
+          example: null
