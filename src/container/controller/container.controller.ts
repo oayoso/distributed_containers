@@ -1,8 +1,9 @@
-import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Query, UseGuards } from '@nestjs/common';
 import { ParamDto } from '../dto/param.dto';
 import { IContainerService } from '../interfaces/events.service.interface';
+import { HeaderAuthGuard } from '../../common/guards/header-auth.guard';
 
-
+@UseGuards(HeaderAuthGuard) 
 @Controller('container')
 export class ContainerController {
     constructor(

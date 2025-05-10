@@ -1,8 +1,9 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
 import { CreateEventDto } from '../dtos/create-event.dto';
 import { IEventsService } from '../interfaces/events.service.interface';
+import { HeaderAuthGuard } from '../../common/guards/header-auth.guard';
 
-
+@UseGuards(HeaderAuthGuard) 
 @Controller('events')
 export class EventsController { 
     constructor(

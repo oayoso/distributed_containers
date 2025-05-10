@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IContainerService } from '../interfaces/events.service.interface';
 import { IContainerRepository } from '../interfaces/events.repository.interface';
 import { ParamDto } from '../dto/param.dto';
+import { EncryptionService } from '../../common/service/encryption.service';
 
 
 @Injectable()
@@ -51,5 +52,10 @@ export class ContainerService implements IContainerService {
             prevPage: hasPrevPage ? page - 1 : null,
             data,
         };
+    }
+
+    async generateToken() {
+        const body = { prueba: "prueba" };
+        return EncryptionService.encrypt(body)
     }
 }

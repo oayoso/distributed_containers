@@ -5,6 +5,7 @@ import { EventsModule } from './events/module/events.module';
 import { RabbitMQModule } from './rabbitmq/module/rabbitmq.module';
 import { ContainerModule } from './container/module/container.module';
 import { ConfigService } from '@nestjs/config';
+import { TokenModule } from './token/module/token.module';
 require('dotenv').config();
 
 
@@ -22,6 +23,7 @@ require('dotenv').config();
     RabbitMQModule, 
     EventsModule,
     ContainerModule,
+    TokenModule,
   ],
   controllers: [],
   providers: [],
